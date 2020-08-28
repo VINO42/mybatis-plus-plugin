@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
  *
  * @author ${author}
  * @since ${date}
+ *
  */
 @Service
 <#if kotlin>

@@ -12,7 +12,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ${package.Service}.${table.serviceName};
 import ${package.Entity}.${table.entityName};
-import ${cfg.obj}.Result;
+import com.cfyy.common.WrapMapper;
+import com.cfyy.common.ServiceResult;
+
 <#if swagger2>
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Api;
@@ -59,7 +61,7 @@ public class ${table.controllerName} {
 <#if swagger2>    @ApiOperation(value = "查询${entity}")</#if>
     @GetMapping(value = "/page")
     public Result<IPage> get${entity}Page(Page<${entity}> page, ${entity} ${cfg.camelTableName}){
-        return new Result<>(${cfg.camelTableName}Service.page(page,Wrappers.query(${cfg.camelTableName})) );
+        return WrapMapper.ok(${cfg.camelTableName}Service.page(page,Wrappers.query(${cfg.camelTableName})) );
     }
 
 <#if swagger2>    @ApiOperation(value = "新增${entity}")</#if>
@@ -67,9 +69,9 @@ public class ${table.controllerName} {
     public Result create(@Valid @RequestBody ${entity} ${cfg.camelTableName}, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-            return new Result<>(fieldErrors);
+            return WrapMapper.error(fieldErrors);
         }
-        return new Result<>(${cfg.camelTableName}Service.save(${cfg.camelTableName}));
+        return WrapMapper.ok(${cfg.camelTableName}Service.save(${cfg.camelTableName}));
     }
 
 <#if swagger2>    @ApiOperation(value = "修改${entity}")</#if>
@@ -77,9 +79,9 @@ public class ${table.controllerName} {
     public Result update(@Valid @RequestBody ${entity} ${cfg.camelTableName}, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-            return new Result<>(fieldErrors);
+            return WrapMapper.error(fieldErrors);
          }
-        return new Result<>(${cfg.camelTableName}Service.updateById(${cfg.camelTableName}));
+        return nWrapMapper.ok(${cfg.camelTableName}Service.updateById(${cfg.camelTableName}));
     }
 
     <#list table.fields as field>
@@ -87,7 +89,7 @@ public class ${table.controllerName} {
     <#if swagger2>@ApiOperation(value = "删除${entity}")</#if>
     @DeleteMapping(value = "/delete/{${field.propertyName}}")
     public Result delete(@PathVariable ${field.propertyType} ${field.propertyName}){
-        return new Result<>(${cfg.camelTableName}Service.removeById(${field.propertyName}));
+        return WrapMapper.ok(${cfg.camelTableName}Service.removeById(${field.propertyName}));
     }
          </#if>
     </#list>
