@@ -223,7 +223,7 @@ public class GenUtil {
 
     public static String underlineToCamel(String name) {
         // 快速检查
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isBlank(name)) {
             // 没必要转换
             return StringPool.EMPTY;
         }
@@ -237,7 +237,7 @@ public class GenUtil {
         String[] camels = tempName.split(ConstVal.UNDERLINE);
         // 跳过原始字符串中开头、结尾的下换线或双重下划线
         // 处理真正的驼峰片段
-        Arrays.stream(camels).filter(camel -> !StringUtils.isEmpty(camel)).forEach(camel -> {
+        Arrays.stream(camels).filter(camel -> !StringUtils.isBlank(camel)).forEach(camel -> {
             if (result.length() == 0) {
                 // 第一个驼峰片段，全部字母都小写
                 result.append(camel);
