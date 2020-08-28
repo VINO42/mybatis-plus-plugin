@@ -14,6 +14,7 @@ import ${package.Service}.${table.serviceName};
 import ${package.Entity}.${table.entityName};
 import com.cfyy.common.WrapMapper;
 import com.cfyy.common.ServiceResultWrapper;
+import com.cfyy.doraemon.base.common.beanandjson.GsonUtils;
 
 <#if swagger2>
 import io.swagger.annotations.ApiOperation;
@@ -60,13 +61,13 @@ public class ${table.controllerName} {
 
 <#if swagger2>    @ApiOperation(value = "查询${entity}")</#if>
     @GetMapping(value = "/page")
-    public ServiceResult<IPage> get${entity}Page(Page<${entity}> page, ${entity} ${cfg.camelTableName}){
+    public ServiceResultWrapper<IPage> get${entity}Page(Page<${entity}> page, ${entity} ${cfg.camelTableName}){
         return WrapMapper.ok(${cfg.camelTableName}Service.page(page,Wrappers.query(${cfg.camelTableName})) );
     }
 
 <#if swagger2>    @ApiOperation(value = "新增${entity}")</#if>
     @PostMapping(value = "/add")
-    public ServiceResult create(@Valid @RequestBody ${entity} ${cfg.camelTableName}, BindingResult bindingResult){
+    public ServiceResultWrapper<Object> create(@Valid @RequestBody ${entity} ${cfg.camelTableName}, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
             return WrapMapper.error(GsonUtils.toJsonString(fieldErrors));
@@ -76,19 +77,19 @@ public class ${table.controllerName} {
 
 <#if swagger2>    @ApiOperation(value = "修改${entity}")</#if>
     @PutMapping(value = "/update")
-    public ServiceResult update(@Valid @RequestBody ${entity} ${cfg.camelTableName}, BindingResult bindingResult){
+    public ServiceResultWrapper<Object> update(@Valid @RequestBody ${entity} ${cfg.camelTableName}, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
             return WrapMapper.error(GsonUtils.toJsonString(fieldErrors));
          }
-        return nWrapMapper.ok(${cfg.camelTableName}Service.updateById(${cfg.camelTableName}));
+        return  WrapMapper.ok(${cfg.camelTableName}Service.updateById(${cfg.camelTableName}));
     }
 
     <#list table.fields as field>
          <#if field.keyFlag>
     <#if swagger2>@ApiOperation(value = "删除${entity}")</#if>
     @DeleteMapping(value = "/delete/{${field.propertyName}}")
-    public ServiceResult delete(@PathVariable ${field.propertyType} ${field.propertyName}){
+    public ServiceResultWrapper<Object> delete(@PathVariable ${field.propertyType} ${field.propertyName}){
         return WrapMapper.ok(${cfg.camelTableName}Service.removeById(${field.propertyName}));
     }
          </#if>
