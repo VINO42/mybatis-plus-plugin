@@ -36,14 +36,14 @@ import lombok.experimental.Accessors;
 @TableName("${table.name}")
 </#if>
 <#if swagger2>
-@ApiModel(value="${entity}Entity对象", description="${table.comment!}")
+@ApiModel(value="${entity}对象", description="${table.comment!}")
 </#if>
 <#if superEntityClass??>
-public class ${entity}Entity extends ${superEntityClass}<#if activeRecord><${entity}Entity></#if> {
+public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}></#if> {
 <#elseif activeRecord>
-public class ${entity}Entity extends Model<${entity}Entity> {
+public class ${entity} extends Model<${entity}> {
 <#else>
-public class ${entity}Entity implements Serializable {
+public class ${entity} implements Serializable {
 </#if>
 
 <#if entitySerialVersionUID>
@@ -108,7 +108,7 @@ public class ${entity}Entity implements Serializable {
     }
 
     <#if entityBuilderModel>
-    public ${entity}Entity set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+    public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
     <#else>
     public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
     </#if>
@@ -140,7 +140,7 @@ public class ${entity}Entity implements Serializable {
 <#if !entityLombokModel>
     @Override
     public String toString() {
-        return "${entity}Entity{" +
+        return "${entity}{" +
     <#list table.fields as field>
         <#if field_index==0>
             "${field.propertyName}=" + ${field.propertyName} +

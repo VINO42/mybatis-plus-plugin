@@ -102,6 +102,9 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
             List<TableInfo> tableInfoList = getConfigBuilder().getTableInfoList();
             for (TableInfo tableInfo : tableInfoList) {
                 Map<String, Object> objectMap = getObjectMap(tableInfo);
+                objectMap.put("entity", tableInfo.getEntityName()+"Entity");
+
+
                 Map<String, String> pathInfo = getConfigBuilder().getPathInfo();
                 TemplateConfig template = getConfigBuilder().getTemplate();
                 // 自定义内容
@@ -122,6 +125,7 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
                     }
                 }
                 String entityName = tableInfo.getEntityName();
+                entityName=entityName+"Entity";
                 // Mp.java
                 if (genConfig.isEntity()) {
                     if (null != entityName && null != pathInfo.get(ENTITY_PATH)) {

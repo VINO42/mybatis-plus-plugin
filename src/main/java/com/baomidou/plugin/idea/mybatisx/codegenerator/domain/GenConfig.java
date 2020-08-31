@@ -12,7 +12,7 @@ public class GenConfig {
     /**
      * 包路径
      **/
-    private String pack = "org.py.mymodule.submodule";
+    private String pack = "com.cfyy";
 
     /**
      * 模块名
