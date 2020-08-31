@@ -19,14 +19,14 @@ import io.swagger.annotations.ApiModelProperty;
 @TableName("${table.name}")
 </#if>
 <#if swagger2>
-    @ApiModel(value="${entity}EntityEntity对象", description="${table.comment!}")
+    @ApiModel(value="${entity}Entity对象", description="${table.comment!}")
 </#if>
 <#if superEntityClass??>
-class ${entity}EntityEntity : ${superEntityClass}<#if activeRecord><${entity}EntityEntity></#if> {
+class ${entity}Entity : ${superEntityClass}<#if activeRecord><${entity}Entity></#if> {
 <#elseif activeRecord>
-class ${entity}EntityEntity : Model<${entity}EntityEntity>() {
+class ${entity}Entity : Model<${entity}Entity>() {
 <#else>
-class ${entity}EntityEntity : Serializable {
+class ${entity}Entity : Serializable {
 </#if>
 
 <#-- ----------  BEGIN 字段循环遍历  ---------->
@@ -102,7 +102,7 @@ class ${entity}EntityEntity : Serializable {
 
 </#if>
     override fun toString(): String {
-        return "${entity}EntityEntity{" +
+        return "${entity}Entity{" +
 <#list table.fields as field>
 <#if field_index==0>
         "${field.propertyName}=" + ${field.propertyName} +
