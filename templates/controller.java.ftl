@@ -38,7 +38,7 @@ import ${superControllerClassPackage};
  * @since ${date}
  */
 <#if swagger2>
-@Api(tags = "${entity}管理")
+@Api(tags = "${entity}Entity管理")
 </#if>
 <#if restControllerStyle>
 @RestController
@@ -58,15 +58,15 @@ public class ${table.controllerName} {
     @Autowired
     private ${table.serviceName} ${cfg.camelTableName}Service;
 
-<#if swagger2>    @ApiOperation(value = "查询${entity}")</#if>
+<#if swagger2>    @ApiOperation(value = "查询${entity}Entity")</#if>
     @GetMapping(value = "/page")
-    public ServiceResult<IPage> get${entity}Page(Page<${entity}> page, ${entity} ${cfg.camelTableName}){
+    public ServiceResult<IPage> get${entity}EntityPage(Page<${entity}Entity> page, ${entity}Entity ${cfg.camelTableName}){
         return WrapMapper.ok(${cfg.camelTableName}Service.page(page,Wrappers.query(${cfg.camelTableName})) );
     }
 
-<#if swagger2>    @ApiOperation(value = "新增${entity}")</#if>
+<#if swagger2>    @ApiOperation(value = "新增${entity}Entity")</#if>
     @PostMapping(value = "/add")
-    public ServiceResult create(@Valid @RequestBody ${entity} ${cfg.camelTableName}, BindingResult bindingResult){
+    public ServiceResult create(@Valid @RequestBody ${entity}Entity ${cfg.camelTableName}, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
             return WrapMapper.error(GsonUtils.toJsonString(fieldErrors));
@@ -74,9 +74,9 @@ public class ${table.controllerName} {
         return WrapMapper.ok(${cfg.camelTableName}Service.save(${cfg.camelTableName}));
     }
 
-<#if swagger2>    @ApiOperation(value = "修改${entity}")</#if>
+<#if swagger2>    @ApiOperation(value = "修改${entity}Entity")</#if>
     @PutMapping(value = "/update")
-    public ServiceResult update(@Valid @RequestBody ${entity} ${cfg.camelTableName}, BindingResult bindingResult){
+    public ServiceResult update(@Valid @RequestBody ${entity}Entity ${cfg.camelTableName}, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
             return WrapMapper.error(GsonUtils.toJsonString(fieldErrors));
@@ -86,7 +86,7 @@ public class ${table.controllerName} {
 
     <#list table.fields as field>
          <#if field.keyFlag>
-    <#if swagger2>@ApiOperation(value = "删除${entity}")</#if>
+    <#if swagger2>@ApiOperation(value = "删除${entity}Entity")</#if>
     @DeleteMapping(value = "/delete/{${field.propertyName}}")
     public ServiceResult delete(@PathVariable ${field.propertyType} ${field.propertyName}){
         return WrapMapper.ok(${cfg.camelTableName}Service.removeById(${field.propertyName}));

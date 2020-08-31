@@ -1,6 +1,6 @@
 package ${package.Service};
 
-import ${package.Entity}.${entity};
+import ${package.Entity}.${entity}Entity;
 import ${superServiceClassPackage};
 
 /**
@@ -12,9 +12,9 @@ import ${superServiceClassPackage};
  * @since ${date}
  */
 <#if kotlin>
-interface ${table.serviceName} : ${superServiceClass}<${entity}>
+interface ${table.serviceName} : ${superServiceClass}<${entity}Entity>
 <#else>
-public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}Entity> {
 
 }
 </#if>
