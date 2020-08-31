@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 </#if>
 <#if entityLombokModel>
 import lombok.Data;
+import lombok.ToString;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 </#if>
@@ -23,6 +24,7 @@ import lombok.experimental.Accessors;
  */
 <#if entityLombokModel>
 @Data
+@ToString
     <#if superEntityClass??>
 @EqualsAndHashCode(callSuper = true)
     <#else>
