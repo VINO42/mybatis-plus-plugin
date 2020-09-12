@@ -1,14 +1,3 @@
-/**
-* =====================================================================================
-*
-* @Created :   ${DATE} ${TIME}
-* @Compiler :  jdk 11
-* @Author :    VINO
-* @Email : 38912428@qq.com
-* @Copyright : 长峰集团(http://www.cfyygf.com/)
-* @Decription :
-* =====================================================================================
-*/
 package ${package.Controller};
 
 import java.util.List;
@@ -41,12 +30,15 @@ import ${superControllerClassPackage};
 </#if>
 
 /**
- * <p>
- * ${table.comment!} 控制器
- * </p>
+ * =====================================================================================
  *
- * @author ${author}
- * @since ${date}
+ * @Created :   ${DATE} ${TIME}
+ * @Compiler :  jdk 11
+ * @Author :    VINO
+ * @Email : 38912428@qq.com
+ * @Copyright : 长峰集团(http://www.cfyygf.com/)
+ * @Decription : ${table.comment!} 控制器
+ * =====================================================================================
  */
 <#if swagger2>
 @Api(tags = "${entity}管理")

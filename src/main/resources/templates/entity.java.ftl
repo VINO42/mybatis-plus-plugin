@@ -1,14 +1,3 @@
-/**
-* =====================================================================================
-*
-* @Created :   ${DATE} ${TIME}
-* @Compiler :  jdk 11
-* @Author :    VINO
-* @Email : 38912428@qq.com
-* @Copyright : 长峰集团(http://www.cfyygf.com/)
-* @Decription :
-* =====================================================================================
-*/
 package ${package.Entity};
 
 <#list table.importPackages as pkg>
@@ -25,12 +14,15 @@ import lombok.experimental.Accessors;
 </#if>
 
 /**
- * <p>
- * ${table.comment!}
- * </p>
+ * =====================================================================================
  *
- * @author ${author}
- * @since ${date}
+ * @Created :   ${DATE} ${TIME}
+ * @Compiler :  jdk 11
+ * @Author :    VINO
+ * @Email : 38912428@qq.com
+ * @Copyright : 长峰集团(http://www.cfyygf.com/)
+ * @Decription : ${table.comment!}
+ * =====================================================================================
  */
 <#if entityLombokModel>
 @Data
