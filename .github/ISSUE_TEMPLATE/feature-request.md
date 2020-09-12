@@ -1,19 +1,13 @@
 ---
-name: "Feature Request"
+name: "Feature Request(我想要加功能)"
 about: I have a suggestion
 labels: type/enhancement
 ---
 
-## Feature Request
+## Feature Request(我想要加功能)
 
-**Is your feature request related to a problem? Please describe:**
+**Is your feature request related to a problem? Please describe:**(请描述想要添加的功能对应的问题?)
 <!-- A clear and concise description of what the problem is. Ex. I'm always frustrated when [...] -->
 
-**Describe the feature you'd like:**
+**Describe the feature you'd like:**(请描述想要添加的功能)
 <!-- A clear and concise description of what you want to happen. -->
-
-**Describe alternatives you've considered:**
-<!-- A clear and concise description of any alternative solutions or features you've considered. -->
-
-**Teachability, Documentation, Adoption, Migration Strategy:**
-<!-- If you can, explain some scenarios how users might use this, situations it would be helpful in. Any API designs, mockups, or diagrams are also helpful. -->
