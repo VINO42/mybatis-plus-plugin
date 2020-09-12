@@ -7,13 +7,14 @@ import javax.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ${package.Service}.${table.serviceName};
 import ${package.Entity}.${table.entityName};
 import com.cfyy.common.WrapMapper;
 import com.cfyy.common.ServiceResultWrapper;
+import com.cfyy.doraemon.base.common.beanandjson.GsonUtils;
 
 <#if swagger2>
 import io.swagger.annotations.ApiOperation;
@@ -34,10 +35,9 @@ import ${superControllerClassPackage};
  *
  * @Created :   ${DATE} ${TIME}
  * @Compiler :  jdk 11
- * @Author :    VINO
- * @Email : 38912428@qq.com
+ * @Author :    ${author}
  * @Copyright : 长峰集团(http://www.cfyygf.com/)
- * @Decription : ${table.comment!} 控制器
+ * @Decription : ${table.comment} 控制器
  * =====================================================================================
  */
 <#if swagger2>

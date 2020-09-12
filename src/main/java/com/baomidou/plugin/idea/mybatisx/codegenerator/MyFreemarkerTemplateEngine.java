@@ -14,7 +14,9 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.GenConfig;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import org.apache.http.client.utils.DateUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,6 +32,8 @@ import static com.baomidou.mybatisplus.generator.config.ConstVal.*;
  * 只能读取外部的文件，要提供全部文件，不然不能找到
  */
 public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
+    private Logger logger = LoggerFactory.getLogger(MyFreemarkerTemplateEngine.class);
+
     /**
      * 从用户读取自定义模板文件
      */
@@ -103,11 +107,14 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
         try {
             List<TableInfo> tableInfoList = getConfigBuilder().getTableInfoList();
             for (TableInfo tableInfo : tableInfoList) {
+                tableInfo.setMapperName( tableInfo.getEntityName() + ConstVal.MAPPER );
+                tableInfo.setXmlName( tableInfo.getEntityName() + ConstVal.MAPPER);
+                tableInfo.setEntityName( tableInfo.getEntityName() + "Entity" );
                 Map<String, Object> objectMap = getObjectMap(tableInfo);
                 //2020/8/20 15:20
-                objectMap.put("DATE", DateUtils.formatDate(new Date(), "yyyy/MM/dd"));
-                objectMap.put("TIME", DateUtils.formatDate(new Date(), "HH:mm:ss"));
-                objectMap.put("entity", tableInfo.getEntityName()+"Entity");
+                objectMap.put("DATE",  DateFormatUtils.format(new Date(),  "yyyy/MM/dd"));
+                objectMap.put("TIME", DateFormatUtils.format(new Date(),  "HH:mm:ss"));
+                objectMap.put("entity", tableInfo.getEntityName());
 
 
                 Map<String, String> pathInfo = getConfigBuilder().getPathInfo();
@@ -130,7 +137,6 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
                     }
                 }
                 String entityName = tableInfo.getEntityName();
-                entityName=entityName+"Entity";
                 // Mp.java
                 if (genConfig.isEntity()) {
                     if (null != entityName && null != pathInfo.get(ENTITY_PATH)) {
@@ -151,7 +157,8 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
                     }
                     // MpMapper.xml
                     if (null != tableInfo.getXmlName() && null != pathInfo.get(ConstVal.XML_PATH)) {
-                        String xmlFile = String.format((pathInfo.get(ConstVal.XML_PATH) + File.separator + tableInfo.getXmlName() + ConstVal.XML_SUFFIX), entityName);
+                        logger.info("{}----", tableInfo.getXmlName());
+                        String xmlFile = String.format((pathInfo.get(ConstVal.XML_PATH) + File.separator + tableInfo.getXmlName() + ConstVal.XML_SUFFIX), entityName.replace("Entity", ""));
                         if (isCreate(FileType.XML, xmlFile)) {
                             writer(objectMap, templateFilePath(template.getXml()), xmlFile);
                         }

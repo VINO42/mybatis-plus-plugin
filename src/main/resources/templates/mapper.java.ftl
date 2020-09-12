@@ -8,10 +8,10 @@ import ${superMapperClassPackage};
  *
  * @Created :   ${DATE} ${TIME}
  * @Compiler :  jdk 11
- * @Author :    VINO
+ * @Author :    ${author}
  * @Email : 38912428@qq.com
  * @Copyright : 长峰集团(http://www.cfyygf.com/)
- * @Decription : ${table.comment!} Mapper 接口
+ * @Decription : ${table.comment} Mapper 接口
  * =====================================================================================
  */
 <#if kotlin>

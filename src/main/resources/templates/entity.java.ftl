@@ -18,10 +18,9 @@ import lombok.experimental.Accessors;
  *
  * @Created :   ${DATE} ${TIME}
  * @Compiler :  jdk 11
- * @Author :    VINO
- * @Email : 38912428@qq.com
+ * @Author :    ${author}
  * @Copyright : 长峰集团(http://www.cfyygf.com/)
- * @Decription : ${table.comment!}
+ * @Decription : ${table.comment}
  * =====================================================================================
  */
 <#if entityLombokModel>
