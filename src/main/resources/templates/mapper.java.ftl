@@ -1,3 +1,14 @@
+/**
+* =====================================================================================
+*
+* @Created :   ${DATE} ${TIME}
+* @Compiler :  jdk 11
+* @Author :    VINO
+* @Email : 38912428@qq.com
+* @Copyright : 长峰集团(http://www.cfyygf.com/)
+* @Decription :
+* =====================================================================================
+*/
 package ${package.Mapper};
 
 import ${package.Entity}.${entity};

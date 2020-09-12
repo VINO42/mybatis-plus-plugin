@@ -14,11 +14,13 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.GenConfig;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import org.apache.http.client.utils.DateUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -102,6 +104,9 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
             List<TableInfo> tableInfoList = getConfigBuilder().getTableInfoList();
             for (TableInfo tableInfo : tableInfoList) {
                 Map<String, Object> objectMap = getObjectMap(tableInfo);
+                //2020/8/20 15:20
+                objectMap.put("DATE", DateUtils.formatDate(new Date(), "yyyy/MM/dd"));
+                objectMap.put("TIME", DateUtils.formatDate(new Date(), "HH:mm:ss"));
                 objectMap.put("entity", tableInfo.getEntityName()+"Entity");
 
 
