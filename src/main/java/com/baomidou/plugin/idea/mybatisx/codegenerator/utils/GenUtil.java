@@ -205,7 +205,7 @@ public class GenUtil {
         strategy.setInclude(tableName);
         strategy.setControllerMappingHyphenStyle(true);
         // 表前缀
-        strategy.setTablePrefix(pc.getModuleName() + "_");
+        strategy.setTablePrefix(genConfig.getPrefix());
         // 是否使用自动填充
         if (genConfig.isFill()) {
             List<TableFill> tableFillList = new ArrayList<>();

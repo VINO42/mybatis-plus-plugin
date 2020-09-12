@@ -50,6 +50,8 @@ public class ShowTableInfo extends JFrame {
     private JCheckBox mapperCheckBox;
     private JCheckBox serviceImplCheckBox;
     private JCheckBox controllerCheckBox;
+    private JLabel tablePrefix;
+    private JTextField tablePrefixTextField;
     private final String projectFilePath;
 
     public ShowTableInfo(String projectFilePath) {
@@ -192,6 +194,8 @@ public class ShowTableInfo extends JFrame {
         serviceCheckBox.setSelected(genConfig.isServiceImpl());
         serviceImplCheckBox.setSelected(genConfig.isServiceImpl());
         controllerCheckBox.setSelected(genConfig.isController());
+        //
+        tablePrefixTextField.setText(genConfig.getPrefix());
 
         mymoduleTextField.setText(genConfig.getModuleName());
 
@@ -230,6 +234,8 @@ public class ShowTableInfo extends JFrame {
         genConfig.setService(serviceCheckBox.isSelected());
         genConfig.setServiceImpl(serviceImplCheckBox.isSelected());
         genConfig.setController(controllerCheckBox.isSelected());
+        //
+        genConfig.setPrefix(tablePrefixTextField.getText());
 
         genConfig.setModuleName(mymoduleTextField.getText());
         genConfig.setPack(myPackTextField.getText());
