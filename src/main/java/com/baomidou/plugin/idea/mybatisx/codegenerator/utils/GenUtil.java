@@ -185,7 +185,8 @@ public class GenUtil {
         templateConfig.setService(templatePath + "/service.java");
         templateConfig.setService(templatePath + "/service.java");
         templateConfig.setServiceImpl(templatePath + "/serviceImpl.java");
-        templateConfig.setController(templatePath + "/controller.java");
+        //自定义controller模板名称 防止覆盖
+        templateConfig.setController(templatePath + "/mycontroller.java");
         templateConfig.setXml(null);
         mpg.setTemplate(templateConfig);
 

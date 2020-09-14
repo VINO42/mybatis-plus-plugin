@@ -37,7 +37,7 @@ import ${superControllerClassPackage};
  * @Compiler :  jdk 11
  * @Author :    ${author}
  * @Copyright : 长峰集团(http://www.cfyygf.com/)
- * @Decription : ${table.comment} 控制器
+ * @Decription : ${table.comment!} 控制器
  * =====================================================================================
  */
 <#if swagger2>
