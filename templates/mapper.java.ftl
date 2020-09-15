@@ -2,6 +2,7 @@ package ${package.Mapper};
 
 import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * =====================================================================================
@@ -9,6 +10,7 @@ import ${superMapperClassPackage};
  * @Created :   ${DATE} ${TIME}
  * @Compiler :  jdk 11
  * @Author :    ${author}
+ * @Email : 38912428@qq.com
  * @Copyright : 长峰集团(http://www.cfyygf.com/)
  * @Decription : ${table.comment} Mapper 接口
  * =====================================================================================
@@ -16,6 +18,7 @@ import ${superMapperClassPackage};
 <#if kotlin>
 interface ${table.mapperName} : ${superMapperClass}<${entity}>
 <#else>
+@Mapper
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
 
 }
