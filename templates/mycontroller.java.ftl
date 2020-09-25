@@ -14,7 +14,8 @@ import ${package.Service}.${table.serviceName};
 import ${package.Entity}.${table.entityName};
 import com.cfyy.common.WrapMapper;
 import com.cfyy.common.ServiceResultWrapper;
-import com.cfyy.doraemon.base.common.beanandjson.GsonUtils;
+import org.apache.commons.lang3.StringUtils;
+import static com.cfyy.common.Constant.ResponseCode.ILLEGAL_ARGUMENT_ERROR_CODE_;
 
 <#if swagger2>
 import io.swagger.annotations.ApiOperation;
@@ -72,7 +73,8 @@ public class ${table.controllerName} {
     public ServiceResultWrapper create(@Valid @RequestBody ${entity} ${cfg.camelTableName}, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-            return WrapMapper.error(GsonUtils.toJsonString(fieldErrors));
+            String defaultMessage = fieldErrors.get(0).getDefaultMessage();
+            return WrapMapper.error(ILLEGAL_ARGUMENT_ERROR_CODE_,StringUtils.isBlank(defaultMessage)?"系统错误":defaultMessage);
         }
         return WrapMapper.ok(${cfg.camelTableName}Service.save(${cfg.camelTableName}));
     }
@@ -82,7 +84,8 @@ public class ${table.controllerName} {
     public ServiceResultWrapper update(@Valid @RequestBody ${entity} ${cfg.camelTableName}, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-            return WrapMapper.error(GsonUtils.toJsonString(fieldErrors));
+            String defaultMessage = fieldErrors.get(0).getDefaultMessage();
+            return WrapMapper.error(ILLEGAL_ARGUMENT_ERROR_CODE_,StringUtils.isBlank(defaultMessage)?"系统错误":defaultMessage);
          }
         return WrapMapper.ok(${cfg.camelTableName}Service.updateById(${cfg.camelTableName}));
     }
