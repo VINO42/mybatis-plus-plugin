@@ -12,6 +12,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 </#if>
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 /**
  * =====================================================================================
@@ -43,7 +44,7 @@ public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}><
 <#elseif activeRecord>
 public class ${entity} extends Model<${entity}> {
 <#else>
-public class ${entity} implements Serializable {
+public class ${entity} extends Model<${entity}> implements Serializable {
 </#if>
 
 <#if entitySerialVersionUID>
