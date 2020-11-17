@@ -3,7 +3,7 @@ name: "General Question(问题)"
 about: Usage question that isn't answered in docs or discussion
 labels: question
 ---
-
+<!-- label: question -->
 ## General Question(问题)
 
 Before asking a question, make sure you have(提问题前先思考一下):

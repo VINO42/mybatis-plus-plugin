@@ -3,7 +3,7 @@ name: "Feature Request(我想要加功能)"
 about: I have a suggestion
 labels: type/enhancement
 ---
-
+<!-- label: enhancement -->
 ## Feature Request(我想要加功能)
 
 **Is your feature request related to a problem? Please describe:**(请描述想要添加的功能对应的问题?)

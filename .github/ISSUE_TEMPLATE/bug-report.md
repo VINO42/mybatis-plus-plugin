@@ -3,7 +3,7 @@ name: "Bug Report(我要报Bug)"
 about: Something isn't working as expected
 labels: type/bug
 ---
-
+<!-- label: bug -->
 ## Bug Report(我要报Bug)
 
 Please answer these questions before submitting your issue. Thanks!(提问前请先回答下面的问题,谢谢!)
