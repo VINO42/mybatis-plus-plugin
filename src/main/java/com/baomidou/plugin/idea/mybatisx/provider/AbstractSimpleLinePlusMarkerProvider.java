@@ -23,7 +23,7 @@ public abstract class AbstractSimpleLinePlusMarkerProvider<F extends PsiElement,
 
 
     @Override
-    public void collectSlowLineMarkers(@NotNull List<? extends PsiElement> elements, @NotNull Collection<? super LineMarkerInfo<?>> result) {
+    public void collectSlowLineMarkers(@NotNull List<PsiElement> elements, @NotNull Collection<LineMarkerInfo> result) {
         super.collectSlowLineMarkers(elements, result);
     }
 

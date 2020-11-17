@@ -24,7 +24,7 @@ import com.intellij.util.CommonProcessors;
 public class PlusMapperLineMarkerProvider extends RelatedItemLineMarkerProvider {
 
     @Override
-    protected void collectNavigationMarkers(@NotNull PsiElement element, @NotNull Collection<? super RelatedItemLineMarkerInfo<?>> result) {
+    protected void collectNavigationMarkers(@NotNull PsiElement element, @NotNull Collection<? super RelatedItemLineMarkerInfo> result) {
         if (element instanceof PsiNameIdentifierOwner && JavaUtils.isElementWithinInterface(element)) {
             CommonProcessors.CollectProcessor<IdDomElement> processor = new CommonProcessors.CollectProcessor<IdDomElement>();
             PlusJavaService.getInstance(element.getProject()).process(element, processor);
