@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @Created :   ${DATE} ${TIME}
  * @Compiler :  jdk 11
  * @Author :    ${author}
- * @Copyright : 长峰集团(http://www.cfyygf.com/)
+ * @Copyright : ${author}
  * @Decription : ${table.comment} 服务实现类
  * =====================================================================================
  */

@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
  * @Created :   ${DATE} ${TIME}
  * @Compiler :  jdk 11
  * @Author :    ${author}
- * @Copyright : 长峰集团(http://www.cfyygf.com/)
+ * @Copyright : ${author}
  * @Decription : ${table.comment}
  * =====================================================================================
  */
