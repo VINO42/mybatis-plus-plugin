@@ -10,12 +10,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import ${package.Service}.${table.serviceName};
 import ${package.Entity}.${table.entityName};
 import com.cfyy.common.WrapMapper;
 import com.cfyy.common.ServiceResultWrapper;
 import org.apache.commons.lang3.StringUtils;
-import static com.cfyy.common.Constant.ResponseCode.ILLEGAL_ARGUMENT_ERROR_CODE_;
+import static com.cfyy.common.ServiceResponseCodeEnum.ILLEGAL_ARGUMENT_ERROR;
 
 <#if swagger2>
 import io.swagger.annotations.ApiOperation;
@@ -74,18 +76,18 @@ public class ${table.controllerName} {
         if (bindingResult.hasErrors()) {
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
             String defaultMessage = fieldErrors.get(0).getDefaultMessage();
-            return WrapMapper.error(ILLEGAL_ARGUMENT_ERROR_CODE_,StringUtils.isBlank(defaultMessage)?"系统错误":defaultMessage);
+            return WrapMapper.error(ILLEGAL_ARGUMENT_ERROR.status,StringUtils.isBlank(defaultMessage)?"系统错误":defaultMessage);
         }
         return WrapMapper.ok(${cfg.camelTableName}Service.save(${cfg.camelTableName}));
     }
 
 <#if swagger2>    @ApiOperation(value = "修改${entity}")</#if>
-    @PutMapping(value = "/update")
+    @PostMapping(value = "/update")
     public ServiceResultWrapper update(@Valid @RequestBody ${entity} ${cfg.camelTableName}, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
             String defaultMessage = fieldErrors.get(0).getDefaultMessage();
-            return WrapMapper.error(ILLEGAL_ARGUMENT_ERROR_CODE_,StringUtils.isBlank(defaultMessage)?"系统错误":defaultMessage);
+            return WrapMapper.error(ILLEGAL_ARGUMENT_ERROR.status,StringUtils.isBlank(defaultMessage)?"系统错误":defaultMessage);
          }
         return WrapMapper.ok(${cfg.camelTableName}Service.updateById(${cfg.camelTableName}));
     }
@@ -93,7 +95,7 @@ public class ${table.controllerName} {
     <#list table.fields as field>
          <#if field.keyFlag>
     <#if swagger2>@ApiOperation(value = "删除${entity}")</#if>
-    @DeleteMapping(value = "/delete/{${field.propertyName}}")
+    @PostMapping(value = "/delete/{${field.propertyName}}")
     public ServiceResultWrapper delete(@PathVariable ${field.propertyType} ${field.propertyName}) {
         return WrapMapper.ok(${cfg.camelTableName}Service.removeById(${field.propertyName}));
     }

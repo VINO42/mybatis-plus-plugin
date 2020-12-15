@@ -10,6 +10,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import ${package.Service}.${table.serviceName};
 import ${package.Entity}.${table.entityName};
 import com.cfyy.common.WrapMapper;
@@ -37,7 +39,7 @@ import ${superControllerClassPackage};
  * @Created :   ${DATE} ${TIME}
  * @Compiler :  jdk 11
  * @Author :    ${author}
- * @Copyright : ${author}
+ * @Copyright : 长峰集团(http://www.cfyygf.com/)
  * @Decription : ${table.comment!} 控制器
  * =====================================================================================
  */
@@ -80,7 +82,7 @@ public class ${table.controllerName} {
     }
 
 <#if swagger2>    @ApiOperation(value = "修改${entity}")</#if>
-    @PutMapping(value = "/update")
+    @PostMapping(value = "/update")
     public ServiceResultWrapper update(@Valid @RequestBody ${entity} ${cfg.camelTableName}, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
@@ -93,7 +95,7 @@ public class ${table.controllerName} {
     <#list table.fields as field>
          <#if field.keyFlag>
     <#if swagger2>@ApiOperation(value = "删除${entity}")</#if>
-    @DeleteMapping(value = "/delete/{${field.propertyName}}")
+    @PostMapping(value = "/delete/{${field.propertyName}}")
     public ServiceResultWrapper delete(@PathVariable ${field.propertyType} ${field.propertyName}) {
         return WrapMapper.ok(${cfg.camelTableName}Service.removeById(${field.propertyName}));
     }

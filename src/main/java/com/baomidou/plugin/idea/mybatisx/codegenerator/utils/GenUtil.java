@@ -152,9 +152,8 @@ public class GenUtil {
         };
 
         // 如果模板引擎是 freemarker
-//        String templatePath = "/templates/mapper.xml.ftl";
         String templatePath = "/templates";
-        String mapperTemplatePath = templatePath + "/mapper.xml.ftl";
+        String mapperTemplatePath = templatePath + "/mymapper.xml.ftl";
         // 如果模板引擎是 velocity
         // String templatePath = "/templates/mapper.xml.vm";
 
@@ -179,12 +178,12 @@ public class GenUtil {
         // 配置自定义输出模板
         //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
         // templateConfig.setEntity("templates/entity2.java");
-        templateConfig.setEntity(templatePath + "/entity.java");
-        templateConfig.setMapper(templatePath + "/mapper.java");
-        templateConfig.setEntityKt(templatePath + "/entity.kt");
-        templateConfig.setService(templatePath + "/service.java");
-        templateConfig.setService(templatePath + "/service.java");
-        templateConfig.setServiceImpl(templatePath + "/serviceImpl.java");
+        templateConfig.setEntity(templatePath + "/myentity.java");
+        templateConfig.setMapper(templatePath + "/mymapper.java");
+        templateConfig.setEntityKt(templatePath + "/myentity.kt");
+        templateConfig.setService(templatePath + "/myservice.java");
+        templateConfig.setService(templatePath + "/myservice.java");
+        templateConfig.setServiceImpl(templatePath + "/myserviceImpl.java");
         //自定义controller模板名称 防止覆盖
         templateConfig.setController(templatePath + "/mycontroller.java");
         templateConfig.setXml(null);

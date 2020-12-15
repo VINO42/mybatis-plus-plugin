@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Compiler :  jdk 11
  * @Author :    ${author}
  * @Email : 38912428@qq.com
- * @Copyright : 长峰集团(http://www.cfyygf.com/)
+ * @Copyright : ${author}
  * @Decription : ${table.comment} Mapper 接口
  * =====================================================================================
  */
