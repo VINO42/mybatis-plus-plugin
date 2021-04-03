@@ -3,6 +3,7 @@ package com.baomidou.plugin.idea.mybatisx.codegenerator.view;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.MysqlUtil;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.ColumnInfo;
 import com.intellij.ui.JBColor;
+import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -10,7 +11,9 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ShowColumnInfo extends JFrame {
     private JPanel contentPane;
@@ -18,9 +21,14 @@ public class ShowColumnInfo extends JFrame {
     private JButton buttonCancel;
     private JTable tableColumn;
     private JTextField fieldPrefixField;
-    private JLabel fieldPrefix;
     private JCheckBox allSelect;
-    private ShowTableInfo.FieldConfig fieldConfig;
+    private final ShowTableInfo.FieldConfig fieldConfig;
+    // 记录一下修改后的字段,等下一次查看会显示修改后的数据，没有做持久化处理，idea重启后消失修改
+    private static final Map<Object, Object> changeFieldMap = new HashMap<>();
+    // 修改的行
+    private int editRow = -1;
+    // 修改的列
+    private int editColumn = -1;
 
     public ShowColumnInfo(String tableName, ShowTableInfo.FieldConfig fieldConfig) {
         this.fieldConfig = fieldConfig;
@@ -66,10 +74,15 @@ public class ShowColumnInfo extends JFrame {
         for (int i = 0; i < columnInfoList.size(); i++) {
             //每行的列数
             ColumnInfo columnInfo = columnInfoList.get(i);
+            Object showField = columnInfo.getColumnName();
+            String changeField = (String) changeFieldMap.get(columnInfo.getColumnName());
+            if (StringUtils.isNotEmpty(changeField)) {
+                showField = changeField;
+            }
             Object[] tableInfoArr = {
                 true,
                 columnInfo.getColumnName(),
-                columnInfo.getColumnName(),
+                showField,
                 columnInfo.getIsNullable(),
                 columnInfo.getColumnType(),
                 columnInfo.getColumnComment(),
@@ -79,13 +92,13 @@ public class ShowColumnInfo extends JFrame {
             rowData[i] = tableInfoArr;
         }
 
-        String[] columnNames = new String[]{"checked", "field name", "property", "allow be empty", "field type", "reamrk", "columnKey", "extra"};
+        String[] columnNames = new String[]{"是否需要导出", "字段名称", "字段重新命名", "是否允许为空", "类型", "备注", "主键", "其他"};
 //        Object[][] rowData = {{"1","2","3","4","5"}};
-        DefaultTableModel tableModel = new DefaultTableModel(rowData, columnNames){
+        DefaultTableModel tableModel = new DefaultTableModel(rowData, columnNames) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 Object o = getValueAt(0, columnIndex);
-                return  o != null ? o.getClass() : super.getColumnClass(columnIndex);
+                return o != null ? o.getClass() : super.getColumnClass(columnIndex);
             }
         };
 
@@ -107,6 +120,40 @@ public class ShowColumnInfo extends JFrame {
         tableColumn.setModel(tableModel);
         tableColumn.setAutoCreateRowSorter(true);
         ViewUtil.fitTableColumns(tableColumn);
+
+        tableColumn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // 单击确认修改
+                if (e.getClickCount() == 1) {
+                    if (editRow == -1 || editColumn == -1) {
+                        return;
+                    }
+                    //获得原始FIELD列位置
+                    int col = 1;
+                    final Object originValue = tableColumn.getValueAt(editRow, col);
+
+                    final Object updateValue = tableColumn.getValueAt(editRow, editColumn);
+                    changeFieldMap.put(originValue, updateValue);
+                    editRow = -1;
+                    editColumn = -1;
+                } // 双击编辑表格
+                else if (e.getClickCount() == 2) {
+                    int row = ((JTable) e.getSource()).rowAtPoint(e.getPoint()); //获得行位置
+                    int col = ((JTable) e.getSource()).columnAtPoint(e.getPoint()); //获得列位置
+                    if (col == 2) { //
+                        if (tableColumn.getCellEditor() != null) {
+                            tableColumn.getCellEditor().stopCellEditing();
+                        }
+                        tableColumn.editCellAt(row, col, e);
+
+                        editRow = row;
+                        editColumn = col;
+
+                    }
+                }
+            }
+        });
 
         allSelect.addChangeListener(new ChangeListener() {
             @Override
