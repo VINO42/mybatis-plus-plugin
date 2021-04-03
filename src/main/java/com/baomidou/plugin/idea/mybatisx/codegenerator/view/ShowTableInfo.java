@@ -56,7 +56,7 @@ public class ShowTableInfo extends JFrame {
     private JLabel tablePrefix;
     private JTextField tablePrefixTextField;
     private final String projectFilePath;
-    private Map<String, FieldConfig> tableFieldConfigMaps = new ConcurrentHashMap<>();
+    private final Map<String, FieldConfig> tableFieldConfigMaps = new ConcurrentHashMap<>();
 
     public ShowTableInfo(String projectFilePath) {
         this.projectFilePath = projectFilePath;
@@ -114,9 +114,11 @@ public class ShowTableInfo extends JFrame {
         // 设置表头名称字体颜色
         tableInfo.getTableHeader().setForeground(JBColor.RED);
         // 设置不允许手动改变列宽
-        tableInfo.getTableHeader().setResizingAllowed(false);
+        tableInfo.getTableHeader().setResizingAllowed(true);
         // 设置不允许拖动重新排序各列
         tableInfo.getTableHeader().setReorderingAllowed(false);
+
+        tableInfo.setAutoCreateRowSorter(true);
 
         // 设置滚动面板视口大小（超过该大小的行数据，需要拖动滚动条才能看到）
         tableInfo.setPreferredScrollableViewportSize(new Dimension(600, 300));
@@ -125,7 +127,7 @@ public class ShowTableInfo extends JFrame {
         showColumn.addActionListener(e -> {
             int[] selectedRows = tableInfo.getSelectedRows();
             if (selectedRows.length <= 0) {
-                Messages.showInfoMessage("select one line！", "Mybatis Plus");
+                Messages.showInfoMessage("Select one line！", "Mybatis Plus");
                 return;
             }
             for (int selectedRow : selectedRows) {
@@ -151,24 +153,31 @@ public class ShowTableInfo extends JFrame {
 
             int[] selectedRows = tableInfo.getSelectedRows();
             if (selectedRows.length <= 0) {
-                Messages.showInfoMessage("select one line！", "Mybatis Plus");
+                Messages.showInfoMessage("Select one line！", "Mybatis Plus");
                 return;
             }
             for (int selectedRow : selectedRows) {
                 String tableName = (String) ShowTableInfo.this.tableInfo.getValueAt(selectedRow, 0);
                 FieldConfig fieldConfig = tableFieldConfigMaps.get(tableName);
-                DoCodeGenerator(tableName, genConfig, (fieldConfig == null || fieldConfig.fieldNameMap.size() == 0) ? null : fieldConfig.fieldNameMap, fieldConfig.getFieldPrefix());
-                fieldConfig.clear();
+                if (fieldConfig == null) {
+                    DoCodeGenerator(tableName, genConfig, null, "");
+                }else {
+                    DoCodeGenerator(tableName, genConfig,
+                        fieldConfig.fieldNameMap.size() == 0 ? null
+                            : fieldConfig.fieldNameMap, fieldConfig.getFieldPrefix());
+                    fieldConfig.clear();
+                }
+
             }
             VirtualFileManager.getInstance().syncRefresh();
 
-            Messages.showInfoMessage("generator successful！", "Mybatis Plus");
+            Messages.showInfoMessage("Generator successful！", "Mybatis Plus");
         });
         saveButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 saveMybatisPlusGlobalConst();
-                Messages.showInfoMessage("save successful！", "Mybatis Plus");
+                Messages.showInfoMessage("Save successful！", "Mybatis Plus");
             }
         });
 
@@ -281,7 +290,7 @@ public class ShowTableInfo extends JFrame {
     }
 
     static class FieldConfig {
-        private Map<String, String> fieldNameMap = new HashMap<>();
+        private final Map<String, String> fieldNameMap = new HashMap<>();
         private String fieldPrefix;
 
         public String getFieldPrefix() {

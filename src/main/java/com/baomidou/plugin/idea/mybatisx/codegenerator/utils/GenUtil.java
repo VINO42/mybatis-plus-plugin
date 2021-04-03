@@ -89,7 +89,8 @@ public class GenUtil {
         GenUtil.generatorCode(tableName, genConfig, null, null);
     }
 
-    public static void generatorCode(String tableName, GenConfig genConfig, Map<String, String> fieldNameMap, String fieldPrefix) {
+    public static void generatorCode(String tableName, GenConfig genConfig,
+                                     Map<String, String> fieldNameMap, String fieldPrefix) {
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
 
@@ -153,15 +154,15 @@ public class GenUtil {
 
             @Override
             public Map<String, Object> prepareObjectMap(Map<String, Object> objectMap) {
-                if (fieldNameMap != null){
+                if (fieldNameMap != null) {
                     TableInfo tableInfo = (TableInfo) objectMap.get("table");
                     tableInfo.setFieldNames(null);
                     Iterator<TableField> iterator = tableInfo.getFields().iterator();
-                    while (iterator.hasNext()){
+                    while (iterator.hasNext()) {
                         TableField field = iterator.next();
-                        if (!fieldNameMap.containsKey(field.getName().toUpperCase())){
+                        if (!fieldNameMap.containsKey(field.getName().toUpperCase())) {
                             iterator.remove();
-                        }else {
+                        } else {
                             field.setConvert(true);
                         }
                     }
@@ -240,13 +241,13 @@ public class GenUtil {
         strategy.setNameConvert(new INameConvert() {
             @Override
             public String entityNameConvert(TableInfo tableInfo) {
-                return  NamingStrategy.capitalFirst(processName(tableInfo.getName(), strategy.getNaming(), strategy.getTablePrefix()));
+                return NamingStrategy.capitalFirst(processName(tableInfo.getName(), strategy.getNaming(), strategy.getTablePrefix()));
             }
 
             @Override
             public String propertyNameConvert(TableField field) {
                 String name = field.getName();
-                if (fieldNameMap != null && fieldNameMap.containsKey(name.toUpperCase())){
+                if (fieldNameMap != null && fieldNameMap.containsKey(name.toUpperCase())) {
                     name = fieldNameMap.get(name.toUpperCase());
                 }
                 return processName(name, strategy.getNaming(), strategy.getFieldPrefix());
