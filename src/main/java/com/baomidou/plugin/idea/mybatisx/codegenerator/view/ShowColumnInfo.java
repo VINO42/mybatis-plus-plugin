@@ -137,8 +137,8 @@ public class ShowColumnInfo extends JFrame {
                     changeFieldMap.put(originValue, updateValue);
                     editRow = -1;
                     editColumn = -1;
-                } // 双击编辑表格
-                else if (e.getClickCount() == 2) {
+                } else if (e.getClickCount() == 2) {
+                    // 双击编辑表格
                     int row = ((JTable) e.getSource()).rowAtPoint(e.getPoint()); //获得行位置
                     int col = ((JTable) e.getSource()).columnAtPoint(e.getPoint()); //获得列位置
                     if (col == 2) { //
