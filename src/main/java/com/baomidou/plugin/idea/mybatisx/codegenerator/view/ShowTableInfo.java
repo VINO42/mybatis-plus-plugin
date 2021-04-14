@@ -134,7 +134,9 @@ public class ShowTableInfo extends JFrame {
 //                    TableInfo tableInfo = tableInfoList.get(selectedRow);
                 String tableName = (String) ShowTableInfo.this.tableInfo.getValueAt(selectedRow, 0);
 
-                ShowColumnInfo dialog = new ShowColumnInfo(tableName, tableFieldConfigMaps.computeIfAbsent(tableName, n -> new FieldConfig()));
+                ShowColumnInfo dialog = new ShowColumnInfo(tableName,
+                    tableFieldConfigMaps.computeIfAbsent(MysqlUtil.getInstance().getDbUrl() + "-" + tableName, n -> new FieldConfig()));
+                dialog.setTitle("tableName: "+tableName);
                 dialog.pack();
                 dialog.setVisible(true);
                 dialog.setLocationRelativeTo(null);
@@ -158,10 +160,10 @@ public class ShowTableInfo extends JFrame {
             }
             for (int selectedRow : selectedRows) {
                 String tableName = (String) ShowTableInfo.this.tableInfo.getValueAt(selectedRow, 0);
-                FieldConfig fieldConfig = tableFieldConfigMaps.get(tableName);
+                FieldConfig fieldConfig = tableFieldConfigMaps.get(MysqlUtil.getInstance().getDbUrl() + "-" + tableName);
                 if (fieldConfig == null) {
                     DoCodeGenerator(tableName, genConfig, null, "");
-                }else {
+                } else {
                     DoCodeGenerator(tableName, genConfig,
                         fieldConfig.fieldNameMap.size() == 0 ? null
                             : fieldConfig.fieldNameMap, fieldConfig.getFieldPrefix());

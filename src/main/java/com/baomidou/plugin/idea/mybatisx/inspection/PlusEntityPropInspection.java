@@ -56,7 +56,7 @@ public class PlusEntityPropInspection extends CustomLocalComponentsDiscoverer {
         }
         boolean isAddBean = false;
         LocalAnnotationModelImpl localAnnotationModel = (LocalAnnotationModelImpl) localModel;
-        Collection<SpringBeanPointer> allCommonBeans = localAnnotationModel.getLocalBeans();
+        final Collection<SpringBeanPointer<?>> allCommonBeans = localAnnotationModel.getLocalBeans();
         for (SpringBeanPointer springBeanPointer : allCommonBeans) {
             if (springBeanPointer.getSpringBean() instanceof SpringConfiguration) {
                 SpringConfiguration springConfiguration = (SpringConfiguration) springBeanPointer.getSpringBean();
