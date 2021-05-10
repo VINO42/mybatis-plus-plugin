@@ -102,9 +102,9 @@ public class ShowTableInfo extends JFrame {
         // 字体样式
         tableInfo.setFont(new Font(null, Font.PLAIN, 14));
         // 选中后字体颜色
-        tableInfo.setSelectionForeground(JBColor.DARK_GRAY);
+        tableInfo.setSelectionForeground(JBColor.BLUE);
         // 选中后字体背景
-        tableInfo.setSelectionBackground(JBColor.LIGHT_GRAY);
+        tableInfo.setSelectionBackground(JBColor.PINK);
         // 网格颜色
         tableInfo.setGridColor(JBColor.GRAY);
 

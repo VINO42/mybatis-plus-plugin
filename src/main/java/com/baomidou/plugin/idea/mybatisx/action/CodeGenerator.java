@@ -10,6 +10,7 @@ public class CodeGenerator extends AnAction {
     public void actionPerformed(AnActionEvent event) {
         String projectRoot = event.getProject().getBasePath();
         ShowTableInfo dialog = new ShowTableInfo(projectRoot);
+        dialog.setName("table");
         dialog.pack();
         dialog.setVisible(true);
 //        dialog.setAlwaysOnTop(true);
