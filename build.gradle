@@ -41,7 +41,7 @@ intellij {
 // https://www.jetbrains.com/intellij-repository/releases
 
 group 'com.baomidou.plugin.idea.mybatisPlus'
-version '1.6.2'
+version '1.6.3'
 
 //　src/main/java classpath 需要的仓库
 repositories {
