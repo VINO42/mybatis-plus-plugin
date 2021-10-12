@@ -202,6 +202,8 @@
                 <item value="AUTO(ID自增)"/>
                 <item value="NONE"/>
                 <item value="INPUT(用户输入ID)"/>
+                <item value="ASSIGN_ID(分配ID)"/>
+                <item value="ASSIGN_UUID(分配UUID)"/>
                 <item value="ID_WORKER(全局唯一ID)"/>
                 <item value="UUID(全局唯一ID )"/>
                 <item value="ID_WORKER_STRE(字符串全局唯一ID)"/>
