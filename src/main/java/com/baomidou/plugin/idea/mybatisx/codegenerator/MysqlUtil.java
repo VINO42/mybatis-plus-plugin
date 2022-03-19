@@ -3,6 +3,7 @@ package com.baomidou.plugin.idea.mybatisx.codegenerator;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.db.BaseDb;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.db.MysqlDb;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.db.OracleDb;
+import com.baomidou.plugin.idea.mybatisx.codegenerator.db.Postgresql;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.ColumnInfo;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.TableInfo;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.utils.MybatisConst;
@@ -28,15 +29,17 @@ public class MysqlUtil {
         int dbType = PropertiesComponent.getInstance().getInt(MybatisConst.PLUS_DBTYPE, 0);
         if ("mysql".equals(DB_TYPE_DRIVERS[dbType].getName())) {
             baseDb = new MysqlDb();
-            baseDb.setDbUrl(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_DBURL));
-            baseDb.setUsername(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_USERNAME));
-            baseDb.setPassword(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_PASSWORD));
         } else if ("oracle".equals(DB_TYPE_DRIVERS[dbType].getName())) {
             baseDb = new OracleDb();
-            baseDb.setDbUrl(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_DBURL));
-            baseDb.setUsername(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_USERNAME));
-            baseDb.setPassword(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_PASSWORD));
+
+        } else if ("postgresql".equals(DB_TYPE_DRIVERS[dbType].getName())) {
+            baseDb = new Postgresql();
+        }else {
+            throw new RuntimeException("no database!!");
         }
+        baseDb.setDbUrl(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_DBURL));
+        baseDb.setUsername(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_USERNAME));
+        baseDb.setPassword(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_PASSWORD));
     }
 
     private static MysqlUtil mysqlUtil;

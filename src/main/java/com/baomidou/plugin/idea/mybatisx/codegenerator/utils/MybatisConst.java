@@ -26,7 +26,8 @@ public interface MybatisConst {
 
     DbTypeDriver[] DB_TYPE_DRIVERS = new DbTypeDriver[]{
         new DbTypeDriver(DbType.MYSQL, "mysql"),
-        new DbTypeDriver(DbType.ORACLE, "oracle")
+        new DbTypeDriver(DbType.ORACLE, "oracle"),
+        new DbTypeDriver(DbType.POSTGRE_SQL, "postgresql")
     };
 
 
