@@ -4,16 +4,16 @@ buildscript {
     repositories {
         mavenLocal()
         maven { url 'https://maven.aliyun.com/nexus/content/repositories/central/' }
-//        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-        jcenter()
-        maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
         mavenCentral()
+        google()
+        gradlePluginPortal()
     }
 }
 
 plugins {
     id 'java'
-    id "org.jetbrains.intellij" version "0.7.2"
+    id 'org.jetbrains.kotlin.jvm' version '1.6.20'
+    id "org.jetbrains.intellij" version '1.7.0'
 }
 
 apply plugin: 'idea'
@@ -21,34 +21,33 @@ apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'java'
 apply plugin: 'checkstyle'
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
 // https://github.com/JetBrains/gradle-intellij-plugin/
 // http://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system/prerequisites.html
 intellij {
-    version '2021.3.1'
-    type 'IU'
+    version = '2022.1.4'
+    type = 'IU'
     //Bundled plugin dependencies 配置自带插件，lombok-plugin是手动复制进仓储中的\ideaIU-2019.1.2\plugins
     // 也可以删除'lombok-plugin'
     plugins = ['java','Spring', 'SpringBoot'] // , 'lombok-plugin' , 'DatabaseTools'
-    pluginName 'MybatisPlus'
-    sandboxDirectory = "${rootProject.rootDir}/idea-sandbox"
+    pluginName = 'MybatisPlus'
+//    sandboxDirectory = "${rootProject.rootDir}/idea-sandbox"
     updateSinceUntilBuild = false
 }
 
 // 各种版本去这里找
 // https://www.jetbrains.com/intellij-repository/releases
 
-group 'com.baomidou.plugin.idea.mybatisPlus'
-version '1.7.1'
+group = 'com.baomidou.plugin.idea.mybatisPlus'
+version = '1.7.1'
 
 //　src/main/java classpath 需要的仓库
 repositories {
     mavenLocal()
     maven { url 'https://maven.aliyun.com/nexus/content/repositories/central/' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-    jcenter()
 }
 
 dependencies {
