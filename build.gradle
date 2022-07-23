@@ -40,8 +40,8 @@ intellij {
 // 各种版本去这里找
 // https://www.jetbrains.com/intellij-repository/releases
 
-group = 'com.baomidou.plugin.idea.mybatisPlus'
-version = '1.7.1'
+group 'com.baomidou.plugin.idea.mybatisPlus'
+version '1.7.2'
 
 //　src/main/java classpath 需要的仓库
 repositories {
