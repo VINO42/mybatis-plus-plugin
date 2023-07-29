@@ -15,6 +15,7 @@ import com.baomidou.plugin.idea.mybatisx.codegenerator.MyFreemarkerTemplateEngin
 import com.baomidou.plugin.idea.mybatisx.codegenerator.MysqlUtil;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.GenConfig;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.ColumnInfo;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
 import java.util.*;
@@ -241,7 +242,8 @@ public class GenUtil {
         strategy.setNameConvert(new INameConvert() {
             @Override
             public String entityNameConvert(TableInfo tableInfo) {
-                return NamingStrategy.capitalFirst(processName(tableInfo.getName(), strategy.getNaming(), strategy.getTablePrefix()));
+                String[] stringArray = ArrayUtils.toStringArray(strategy.getTablePrefix().stream().toArray());
+                return NamingStrategy.capitalFirst(processName(tableInfo.getName(), strategy.getNaming(), stringArray));
             }
 
             @Override
@@ -250,7 +252,8 @@ public class GenUtil {
                 if (fieldNameMap != null && fieldNameMap.containsKey(name.toUpperCase())) {
                     name = fieldNameMap.get(name.toUpperCase());
                 }
-                return processName(name, strategy.getNaming(), strategy.getFieldPrefix());
+                String[] stringArray = ArrayUtils.toStringArray(strategy.getFieldPrefix().stream().toArray());
+                return processName(name, strategy.getNaming(), stringArray);
             }
         });
 
@@ -261,7 +264,7 @@ public class GenUtil {
 
     public static String underlineToCamel(String name) {
         // 快速检查
-        if (StringUtils.isEmpty(name)) {
+        if ( !org.apache.commons.lang3.StringUtils.isEmpty(name)) {
             // 没必要转换
             return StringPool.EMPTY;
         }
@@ -275,7 +278,7 @@ public class GenUtil {
         String[] camels = tempName.split(ConstVal.UNDERLINE);
         // 跳过原始字符串中开头、结尾的下换线或双重下划线
         // 处理真正的驼峰片段
-        Arrays.stream(camels).filter(camel -> !StringUtils.isEmpty(camel)).forEach(camel -> {
+        Arrays.stream(camels).filter(camel -> !org.apache.commons.lang3.StringUtils.isEmpty(camel)).forEach(camel -> {
             if (result.length() == 0) {
                 // 第一个驼峰片段，全部字母都小写
                 result.append(camel);

@@ -14,15 +14,18 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.GenConfig;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import static com.baomidou.mybatisplus.generator.config.ConstVal.*;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 /**
  * 只能读取外部的文件，要提供全部文件，不然不能找到
@@ -102,6 +105,16 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
             List<TableInfo> tableInfoList = getConfigBuilder().getTableInfoList();
             for (TableInfo tableInfo : tableInfoList) {
                 Map<String, Object> objectMap = getObjectMap(tableInfo);
+                objectMap.put("DATE", DateFormatUtils.format(new Date(), "yyyy/MM/dd"));
+                objectMap.put("TIME", DateFormatUtils.format(new Date(), "HH:mm:ss"));
+                objectMap.put("entity", tableInfo.getEntityName().replace("Table", EMPTY));
+                objectMap.put("email", "");
+
+                objectMap.put("controllerPath", tableInfo.getEntityName().replace("Table", EMPTY).replace("Entity", EMPTY).toLowerCase());
+                objectMap.put("mapperNameSpaceName", tableInfo.getEntityName().replace("Table", EMPTY).replace("Entity", EMPTY) + "Mapper");
+                objectMap.put("controllerMappingPath", tableInfo.getEntityName().replace("Table", EMPTY).replace("Entity", EMPTY));
+
+
                 Map<String, String> pathInfo = getConfigBuilder().getPathInfo();
                 TemplateConfig template = getConfigBuilder().getTemplate();
                 // 自定义内容

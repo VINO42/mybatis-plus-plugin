@@ -34,7 +34,7 @@ import ${superControllerClassPackage};
  * @Created :   ${DATE} ${TIME}
  * @Compiler :  jdk 17
  * @Author :    ${author}
- * @Copyright : ${author}
+ * @Copyright :  ${author}
  * @Decription : ${table.comment!} 控制器
  * =====================================================================================
  */

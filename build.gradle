@@ -12,8 +12,8 @@ buildscript {
 
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.6.20'
-    id "org.jetbrains.intellij" version '1.7.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.0'
+    id "org.jetbrains.intellij" version '1.15.0'
 }
 
 apply plugin: 'idea'
@@ -27,11 +27,11 @@ targetCompatibility = JavaVersion.VERSION_11
 // https://github.com/JetBrains/gradle-intellij-plugin/
 // http://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system/prerequisites.html
 intellij {
-    version = '2022.1.4'
+    version = '2023.1.2'
     type = 'IU'
     //Bundled plugin dependencies 配置自带插件，lombok-plugin是手动复制进仓储中的\ideaIU-2019.1.2\plugins
     // 也可以删除'lombok-plugin'
-    plugins = ['java','Spring', 'SpringBoot'] // , 'lombok-plugin' , 'DatabaseTools'
+    plugins = ['java','Spring','spring-boot-core'] // , 'lombok-plugin' , 'DatabaseTools'
     pluginName = 'MybatisPlus'
 //    sandboxDirectory = "${rootProject.rootDir}/idea-sandbox"
     updateSinceUntilBuild = false
@@ -41,7 +41,7 @@ intellij {
 // https://www.jetbrains.com/intellij-repository/releases
 
 group 'com.baomidou.plugin.idea.mybatisPlus'
-version '1.7.2'
+version '1.7.2.vino'
 
 //　src/main/java classpath 需要的仓库
 repositories {
@@ -51,13 +51,14 @@ repositories {
 }
 
 dependencies {
-    compile "org.springframework:spring-core:5.0.6.RELEASE"
-    compile group: 'com.baomidou', name: 'mybatis-plus-generator', version: '3.3.0'
-    compile group: 'org.freemarker', name: 'freemarker', version: '2.3.28'
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.16'
-    compile group: 'org.postgresql', name: 'postgresql', version: '42.3.3'
-    compile group: 'cn.easyproject', name: 'ojdbc5', version: '11.2.0.4'
-    compile group: 'commons-configuration', name: 'commons-configuration', version: '1.9'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
+    implementation group: 'org.springframework', name: 'spring-core', version: '6.0.11'
+    implementation group: 'com.baomidou', name: 'mybatis-plus-generator', version: '3.4.1'
+    implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.28'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.1.0'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.3'
+    implementation group: 'cn.easyproject', name: 'ojdbc5', version: '11.2.0.4'
+    implementation group: 'commons-configuration', name: 'commons-configuration', version: '1.9'
 }
 
 test {
