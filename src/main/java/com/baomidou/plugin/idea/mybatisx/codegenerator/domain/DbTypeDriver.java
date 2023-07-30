@@ -1,6 +1,7 @@
 package com.baomidou.plugin.idea.mybatisx.codegenerator.domain;
 
-import com.baomidou.mybatisplus.annotation.DbType;
+
+import com.mybatisflex.core.dialect.DbType;
 
 /**
  * db type and driver

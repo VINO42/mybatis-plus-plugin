@@ -1,21 +1,22 @@
 package com.baomidou.plugin.idea.mybatisx.codegenerator.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
+
+import com.mybatisflex.annotation.KeyType;
 
 public class IdTypeObj {
-    public IdTypeObj(IdType idType, String remark) {
+    public IdTypeObj(KeyType idType, String remark) {
         this.idType = idType;
         this.remark = remark;
     }
 
-    private IdType idType;
+    private KeyType idType;
     private String remark;
 
-    public IdType getIdType() {
+    public KeyType getIdType() {
         return idType;
     }
 
-    public void setIdType(IdType idType) {
+    public void setIdType(KeyType idType) {
         this.idType = idType;
     }
 
