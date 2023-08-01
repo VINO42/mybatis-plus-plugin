@@ -161,8 +161,8 @@ public class ShowTableInfo extends JFrame {
             for (int selectedRow : selectedRows) {
                 String tableName = (String) ShowTableInfo.this.tableInfo.getValueAt(selectedRow, 0);
                 FieldConfig fieldConfig = tableFieldConfigMaps.get(MysqlUtil.getInstance().getDbUrl() + "-" + tableName);
-                Messages.showInfoMessage("tableName：" + tableName, "Mybatis Plus");
-                Messages.showInfoMessage("genConfig：" + gson.toJson(genConfig), "Mybatis Plus");
+//                Messages.showInfoMessage("tableName：" + tableName, "Mybatis Plus");
+//                Messages.showInfoMessage("genConfig：" + gson.toJson(genConfig), "Mybatis Plus");
 
                 if (fieldConfig == null) {
                     DoCodeGenerator(tableName, genConfig, null, "");
@@ -198,11 +198,11 @@ public class ShowTableInfo extends JFrame {
         // 获取数据库 读取数据库信息
         //  配置生成的位置
         //  修改ftl文件
-        Gson gson = new Gson();
-        System.out.println("tableName123: "+tableName);
-        System.out.println("genConfig: "+gson.toJson(genConfig));
-        System.out.println(gson.toJson(fieldNameMap));
-        System.out.println(gson.toJson(fieldPrefix));
+//        Gson gson = new Gson();
+//        System.out.println("tableName123: "+tableName);
+//        System.out.println("genConfig: "+gson.toJson(genConfig));
+//        System.out.println(gson.toJson(fieldNameMap));
+//        System.out.println(gson.toJson(fieldPrefix));
 
         GenUtil.generatorCode(tableName, genConfig, fieldNameMap, fieldPrefix);
     }
