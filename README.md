@@ -10,3 +10,5 @@
 分支:
 vino.plus  mybatis-plus版本
 vino.flex  mybatis-flex版本
+
+做了一些修改 方便自己用
