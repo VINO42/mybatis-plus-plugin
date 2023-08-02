@@ -43,7 +43,11 @@ public class GenUtil {
         // 数据源配置
 
         HikariDataSource dataSource = new HikariDataSource();
-
+        dataSource.setMaximumPoolSize(10);
+        dataSource.setIdleTimeout(20000);
+        dataSource.setMinimumIdle(1);
+        dataSource.setKeepaliveTime(60000);
+        dataSource.setConnectionTimeout(3000);
         dataSource.setJdbcUrl(MysqlUtil.getInstance().getDbUrl());
         dataSource.setUsername(MysqlUtil.getInstance().getUsername());
         dataSource.setPassword(MysqlUtil.getInstance().getPassword());
