@@ -138,11 +138,11 @@ public class GenUtil {
             globalConfig.setTableDefGenerateEnable(true);
             globalConfig.setTableDefPropertiesNameStyle(TableDefConfig.NameStyle.UPPER_CAMEL_CASE);
             globalConfig.setTableDefOverwriteEnable(genConfig.isCover());
-            globalConfig.getPackageConfig().setTableDefPackage(pack + Constants.DOT + genConfig.getEntityName() + ".def");
-            globalConfig.getJavadocConfig().setTableDefPackage(pack + Constants.DOT + genConfig.getEntityName() + ".def");
+            globalConfig.getPackageConfig().setTableDefPackage(pack + Constants.DOT + "def");
+            globalConfig.getJavadocConfig().setTableDefPackage(pack + Constants.DOT + "def");
             globalConfig.setTableDefPropertiesNameStyle(TableDefConfig.NameStyle.UPPER_CASE);
             globalConfig.getTemplateConfig().setTableDef("/templates/tableDef.tpl");
-
+            globalConfig.enableTableDef();
         }
         System.out.println("entity生成配置");
 
