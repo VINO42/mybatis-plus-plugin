@@ -3,7 +3,7 @@ package com.baomidou.plugin.idea.mybatisx.codegenerator.view;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.MysqlUtil;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.GenConfig;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.IdTypeObj;
-import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.TableInfo;
+import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.PluginTableInfo;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.utils.GenUtil;
 import com.google.gson.Gson;
 import com.intellij.ide.util.PropertiesComponent;
@@ -76,13 +76,13 @@ public class ShowTableInfo extends JFrame {
         // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        List<TableInfo> tableInfoList = MysqlUtil.getInstance().getTableInfo();
+        List<PluginTableInfo> tableInfoList = MysqlUtil.getInstance().getTableInfo();
 
         // 表格所有行数据
         Object[][] rowData = new Object[tableInfoList.size()][];
 
         for (int i = 0; i < tableInfoList.size(); i++) {
-            TableInfo tableInfo = tableInfoList.get(i);
+            PluginTableInfo tableInfo = tableInfoList.get(i);
             String[] tableInfoArr = {
                 tableInfo.getTableName(),
                 tableInfo.getCreateTime(),

@@ -2,7 +2,7 @@ package com.baomidou.plugin.idea.mybatisx.contributor;
 
 import com.baomidou.plugin.idea.mybatisx.codegenerator.MysqlUtil;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.ColumnInfo;
-import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.TableInfo;
+import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.PluginTableInfo;
 import com.baomidou.plugin.idea.mybatisx.util.DomUtils;
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionParameters;
@@ -31,9 +31,9 @@ public class PlusSqlParamCompletionContributor extends CompletionContributor {
     private Map<String, List<String>> suggestMaps = new HashMap<>();
 
     public PlusSqlParamCompletionContributor() {
-        List<TableInfo> tableInfos = MysqlUtil.getInstance().getTableInfo();
+        List<PluginTableInfo> tableInfos = MysqlUtil.getInstance().getTableInfo();
         log.info("PlusSqlParamCompletionContributor:" + tableInfos);
-        for (TableInfo tableInfo : tableInfos) {
+        for (PluginTableInfo tableInfo : tableInfos) {
             List<ColumnInfo> columns = MysqlUtil.getInstance().getColumns(tableInfo.getTableName());
             List<String> suggests = new ArrayList<>();
             for (ColumnInfo column : columns) {

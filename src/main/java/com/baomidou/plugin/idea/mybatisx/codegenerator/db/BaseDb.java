@@ -1,7 +1,7 @@
 package com.baomidou.plugin.idea.mybatisx.codegenerator.db;
 
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.ColumnInfo;
-import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.TableInfo;
+import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.PluginTableInfo;
 import com.intellij.openapi.ui.Messages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public abstract class BaseDb {
 
     public abstract String dbName();
 
-    public abstract List<TableInfo> getTableInfo();
+    public abstract List<PluginTableInfo> getTableInfo();
 
     public abstract List<ColumnInfo> getColumns(String tableName);
 

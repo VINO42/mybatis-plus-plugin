@@ -5,7 +5,7 @@ import com.baomidou.plugin.idea.mybatisx.codegenerator.db.MysqlDb;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.db.OracleDb;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.db.Postgresql;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.ColumnInfo;
-import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.TableInfo;
+import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.PluginTableInfo;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.utils.MybatisConst;
 import com.intellij.ide.util.PropertiesComponent;
 import com.zaxxer.hikari.HikariDataSource;
@@ -68,7 +68,7 @@ public class MysqlUtil {
         return mysqlUtil;
     }
 
-    public List<TableInfo> getTableInfo() {
+    public List<PluginTableInfo> getTableInfo() {
         return baseDb.getTableInfo();
     }
 

@@ -4,7 +4,7 @@ package com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo;
  * 表的数据信息
  */
 
-public class TableInfo {
+public class PluginTableInfo {
 
     /**
      * 表名称
@@ -29,7 +29,7 @@ public class TableInfo {
         return tableName;
     }
 
-    public TableInfo setTableName(String tableName) {
+    public PluginTableInfo setTableName(String tableName) {
         this.tableName = tableName;
         return this;
     }
@@ -38,7 +38,7 @@ public class TableInfo {
         return createTime;
     }
 
-    public TableInfo setCreateTime(String createTime) {
+    public PluginTableInfo setCreateTime(String createTime) {
         this.createTime = createTime;
         return this;
     }
@@ -47,7 +47,7 @@ public class TableInfo {
         return engine;
     }
 
-    public TableInfo setEngine(String engine) {
+    public PluginTableInfo setEngine(String engine) {
         this.engine = engine;
         return this;
     }
@@ -56,7 +56,7 @@ public class TableInfo {
         return coding;
     }
 
-    public TableInfo setCoding(String coding) {
+    public PluginTableInfo setCoding(String coding) {
         this.coding = coding;
         return this;
     }
@@ -65,7 +65,7 @@ public class TableInfo {
         return remark;
     }
 
-    public TableInfo setRemark(String remark) {
+    public PluginTableInfo setRemark(String remark) {
         this.remark = remark;
         return this;
     }

@@ -1,7 +1,7 @@
 package com.baomidou.plugin.idea.mybatisx.codegenerator.db;
 
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.ColumnInfo;
-import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.TableInfo;
+import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.PluginTableInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,8 +31,8 @@ public class Postgresql extends BaseDb {
     }
 
     @Override
-    public List<TableInfo> getTableInfo() {
-        List<TableInfo> tableInfos = new ArrayList<>();
+    public List<PluginTableInfo> getTableInfo() {
+        List<PluginTableInfo> tableInfos = new ArrayList<>();
         Connection conn;
         Statement stmt;
         try {
@@ -43,7 +43,7 @@ public class Postgresql extends BaseDb {
             while (rs.next()) {
                 String tableName = rs.getString("table_name");
                 String remark = rs.getString("table_comment");
-                tableInfos.add(new TableInfo()
+                tableInfos.add(new PluginTableInfo()
                     .setTableName(tableName)
                     .setRemark(remark)
                 );

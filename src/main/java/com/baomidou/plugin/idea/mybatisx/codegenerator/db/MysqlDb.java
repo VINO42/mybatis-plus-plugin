@@ -1,7 +1,7 @@
 package com.baomidou.plugin.idea.mybatisx.codegenerator.db;
 
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.ColumnInfo;
-import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.TableInfo;
+import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.PluginTableInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,9 +30,9 @@ public class MysqlDb extends BaseDb {
     }
 
     @Override
-    public List<TableInfo> getTableInfo() {
+    public List<PluginTableInfo> getTableInfo() {
 
-        List<TableInfo> tableInfos = new ArrayList<>();
+        List<PluginTableInfo> tableInfos = new ArrayList<>();
         Connection conn;
         Statement stmt;
         try {
@@ -46,7 +46,7 @@ public class MysqlDb extends BaseDb {
                 String engine = rs.getString("engine");
                 String coding = rs.getString("table_collation");
                 String remark = rs.getString("table_comment");
-                tableInfos.add(new TableInfo()
+                tableInfos.add(new PluginTableInfo()
                     .setTableName(tableName)
                     .setCreateTime(createTime)
                     .setEngine(engine)

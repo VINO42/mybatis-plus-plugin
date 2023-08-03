@@ -1,7 +1,7 @@
 package com.baomidou.plugin.idea.mybatisx.codegenerator.db;
 
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.ColumnInfo;
-import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.TableInfo;
+import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.PluginTableInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,8 +34,8 @@ public class OracleDb extends BaseDb {
     }
 
     @Override
-    public List<TableInfo> getTableInfo() {
-        List<TableInfo> tableInfos = new ArrayList<>();
+    public List<PluginTableInfo> getTableInfo() {
+        List<PluginTableInfo> tableInfos = new ArrayList<>();
         Connection conn;
         Statement stmt;
         try {
@@ -47,7 +47,7 @@ public class OracleDb extends BaseDb {
                 String tableName = rs.getString("table_name");
                 // todo 增加一下其他的信息
                 String remark = rs.getString("comments");
-                tableInfos.add(new TableInfo()
+                tableInfos.add(new PluginTableInfo()
                     .setTableName(tableName)
                     .setCreateTime("")
                     .setEngine("")
