@@ -8,6 +8,7 @@ import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.ColumnInfo;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.vo.TableInfo;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.utils.MybatisConst;
 import com.intellij.ide.util.PropertiesComponent;
+import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +21,8 @@ public class MysqlUtil {
     private Logger logger = LoggerFactory.getLogger(MysqlUtil.class);
 
     private BaseDb baseDb;
+
+    private HikariDataSource dataSource;
 
     private MysqlUtil() {
         resetDbInfo();
@@ -34,12 +37,26 @@ public class MysqlUtil {
 
         } else if ("postgresql".equals(DB_TYPE_DRIVERS[dbType].getName())) {
             baseDb = new Postgresql();
-        }else {
+        } else {
             throw new RuntimeException("no database!!");
         }
         baseDb.setDbUrl(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_DBURL));
         baseDb.setUsername(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_USERNAME));
         baseDb.setPassword(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_PASSWORD));
+        if (dataSource != null && !dataSource.isClosed()) {
+            dataSource.close();
+        }
+        dataSource = new HikariDataSource();
+        dataSource.setMaximumPoolSize(16);
+        dataSource.setMinimumIdle(8);
+        dataSource.setMaxLifetime(1500000);
+        dataSource.setKeepaliveTime(60000);
+        dataSource.setIdleTimeout(60000);
+        dataSource.setConnectionTimeout(60000);
+        dataSource.setValidationTimeout(3000);
+        dataSource.setJdbcUrl(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_DBURL));
+        dataSource.setUsername(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_USERNAME));
+        dataSource.setPassword(PropertiesComponent.getInstance().getValue(MybatisConst.PLUS_PASSWORD));
     }
 
     private static MysqlUtil mysqlUtil;
@@ -77,5 +94,9 @@ public class MysqlUtil {
 
     public void testConnect() {
         baseDb.testConnect();
+    }
+
+    public HikariDataSource getDataSource() {
+        return dataSource;
     }
 }

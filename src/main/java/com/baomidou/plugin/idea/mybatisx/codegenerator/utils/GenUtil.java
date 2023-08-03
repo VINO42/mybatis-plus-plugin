@@ -6,7 +6,6 @@ import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.GenConfig;
 import com.baomidou.plugin.idea.mybatisx.util.Constants;
 import com.google.gson.Gson;
 import com.mybatisflex.core.util.DateUtil;
-import com.zaxxer.hikari.HikariDataSource;
 import io.github.vino42.Generator;
 import io.github.vino42.config.ColumnConfig;
 import io.github.vino42.config.EntityConfig;
@@ -42,15 +41,6 @@ public class GenUtil {
     public static void generatorCode(String tableName, GenConfig genConfig, Map<String, String> fieldNameMap, String fieldPrefix) {
         // 数据源配置
 
-        HikariDataSource dataSource = new HikariDataSource();
-        dataSource.setMaximumPoolSize(10);
-        dataSource.setIdleTimeout(20000);
-        dataSource.setMinimumIdle(1);
-        dataSource.setKeepaliveTime(60000);
-        dataSource.setConnectionTimeout(3000);
-        dataSource.setJdbcUrl(MysqlUtil.getInstance().getDbUrl());
-        dataSource.setUsername(MysqlUtil.getInstance().getUsername());
-        dataSource.setPassword(MysqlUtil.getInstance().getPassword());
 
 //        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/lll?useSSL=false&serverTimezone=UTC");
 //        dataSource.setUsername("root");
@@ -86,6 +76,7 @@ public class GenUtil {
         if (genConfig.isController()) {
             //生成controller的配置
             globalConfig.setControllerGenerateEnable(true);
+            globalConfig.setServiceOverwriteEnable(genConfig.isCover());
             globalConfig.getJavadocConfig().setControllerPackage(pack + Constants.DOT + genConfig.getControllerName());
             globalConfig.getPackageConfig().setControllerPackage(pack + Constants.DOT + genConfig.getControllerName());
             globalConfig.getTemplateConfig().setController("/templates/controller.tpl");
@@ -184,7 +175,7 @@ public class GenUtil {
         globalConfig.getStrategyConfig().setGenerateTables(objects);
 
 
-        Generator generator = new Generator(dataSource, globalConfig);
+        Generator generator = new Generator(MysqlUtil.getInstance().getDataSource(), globalConfig);
         System.out.println("开始生成");
 
 
