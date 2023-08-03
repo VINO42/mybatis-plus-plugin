@@ -76,7 +76,7 @@ public class GenUtil {
         if (genConfig.isController()) {
             //生成controller的配置
             globalConfig.setControllerGenerateEnable(true);
-            globalConfig.setServiceOverwriteEnable(genConfig.isCover());
+            globalConfig.setControllerOverwriteEnable(genConfig.isCover());
             globalConfig.getJavadocConfig().setControllerPackage(pack + Constants.DOT + genConfig.getControllerName());
             globalConfig.getPackageConfig().setControllerPackage(pack + Constants.DOT + genConfig.getControllerName());
             globalConfig.getTemplateConfig().setController("/templates/controller.tpl");
