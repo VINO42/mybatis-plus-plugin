@@ -5,6 +5,7 @@ import com.baomidou.plugin.idea.mybatisx.codegenerator.MysqlUtil;
 import com.baomidou.plugin.idea.mybatisx.codegenerator.domain.GenConfig;
 import com.baomidou.plugin.idea.mybatisx.util.Constants;
 import com.google.gson.Gson;
+import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.core.util.DateUtil;
 import io.github.vino42.Generator;
 import io.github.vino42.config.ColumnConfig;
@@ -18,6 +19,7 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.Pattern;
 
+import static com.baomidou.plugin.idea.mybatisx.codegenerator.utils.MybatisConst.IDTYPES;
 import static com.mybatisflex.core.util.DateUtil.datetimePattern;
 import static java.util.regex.Pattern.matches;
 
@@ -67,6 +69,8 @@ public class GenUtil {
         globalConfig.setCustomConfig("enableMapperCache", genConfig.isEnableCache());
         globalConfig.setCustomConfig("baseResultMap", genConfig.isResultMap());
         globalConfig.setCustomConfig("baseColumnList", genConfig.isBaseColumnList());
+        KeyType idType = IDTYPES[genConfig.getIdtype()].getIdType();
+        globalConfig.setCustomConfig("keyType", idType);
 
         //文档设置
         globalConfig.getJavadocConfig().setAuthor(genConfig.getAuthor());
@@ -120,10 +124,10 @@ public class GenUtil {
         }
         System.out.println("mapper生成配置");
 
-
         //entity生成配置
         if (genConfig.isEntity()) {
             globalConfig.setEntityGenerateEnable(true);
+            globalConfig.getEntityConfig().setWithActiveRecord(true);
             globalConfig.setEntityOverwriteEnable(genConfig.isCover());
             globalConfig.getJavadocConfig().setEntityPackage(pack + Constants.DOT + genConfig.getEntityName());
             globalConfig.getPackageConfig().setEntityPackage(pack + Constants.DOT + genConfig.getEntityName());
